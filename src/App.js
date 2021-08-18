@@ -1,24 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
-
+import "./App.css";
+import Sidebar from "./Components/Sidebar";
+import Topbar from "./Components/Topbar";
+import Dashboard from "./Components/Dashboard";
+import Users from "./Components/Users";
+import Product from "./Components/Product";
+import Createuser from "./Components/Createuser";
+import Edituser from "./Components/Edituser";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { UserProvider } from "./Components/userContext";
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div id="wrapper">
+        <Sidebar />
+        <div id="content-wrapper" class="d-flex flex-column">
+          <div id="content">
+            <Topbar />
+            <div class="container-fluid">
+              <Switch>
+                <UserProvider>
+                <Route path="/" component={Dashboard} exact={true}></Route>
+                <Route path="/product" component={Product} exact={true}></Route>
+
+                <Route path="/user" component={Users} exact={true}></Route>
+<Route path="/createuser"component={Createuser}exact={true}></Route>
+<Route path="/edituser/:id"component={Edituser}exact={true}></Route>
+                </UserProvider>
+              </Switch>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Router>
   );
 }
 
