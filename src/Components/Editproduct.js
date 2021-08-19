@@ -1,32 +1,39 @@
+import axios from 'axios';
 import React, { useEffect } from 'react'
-import{ useContext } from "react";
 import { useState } from "react";
-import {useHistory} from "react-router-dom";
-import ProductContext from "./productContext";
+import { useHistory } from "react-router-dom";
+
 const Editproduct = (props) => {
+  const history = useHistory();
   const [productname, setProductname] = useState("");
   const [price, setPrice] = useState("");
+  const [isLoading, setLoading] = useState(false);
+useEffect(async() => {
+try {
+  let product= await  axios.get(`https://60efffc5f587af00179d3c35.mockapi.io/users/${props.match.params.id}`)
+  setProductname(product.data.productname)
+  setPrice(product.data.price)
+} catch (error) {
+  
+}
+}, [])
 
-useEffect(() => {
-  let productData= productContext.productList[props.match.params.id-1]
-  setProductname(productData.productname);
-  setPrice(productData.price)},[])
-  const productContext = useContext(ProductContext);
-  const history=useHistory()
-
-  let handlesubmit = (e) => {
-    e.preventDefault();
-    //alert(`hello ${username}`)
-    const myData = {
+let handlesubmit = async (e) => {
+  e.preventDefault();
+  try {
+    setLoading(true);
+    await axios.put(`https://60efffc5f587af00179d3c35.mockapi.io/users/${props.match.params.id}`, {
       productname,
-      price
-    };
-    //console.log(myData)
-    //console.log(userContext.userList)
-    productContext.productList[props.match.params.id-1]=myData
-    productContext.setProductList([...productContext.productList]);
-    history.push("/user")
+      price,
+    });
+    setLoading(false);
+    history.push("/product");
+
+  } catch (error) {
+    setLoading(false);
   }
+};
+  
   return ( 
 <div>
       <div class="d-sm-flex align-items-center justify-content-between mb-4">
