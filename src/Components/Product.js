@@ -6,14 +6,14 @@ import { Link } from "react-router-dom";
 const Product = () => {
   const [prodList, setProdList] = useState([]);
   const [isLoading, setLoading] = useState(true);
-  useEffect(async () => {
+  useEffect(async() => {
     try {
-      let products = await axios.get(
-        "https://60efffc5f587af00179d3c35.mockapi.io/users"
-      );
+let products = await axios.get("https://60efffc5f587af00179d3c35.mockapi.io/users")
       setProdList([...products.data]);
       setLoading(false);
-    } catch (error) {
+    } 
+    catch (error) 
+    {
       console.log(error);
       setLoading(false);
     }
@@ -57,7 +57,9 @@ const Product = () => {
           </thead>
 
           <tbody>
-            {prodList.map((product, index) => {
+            {
+            
+          prodList.map((product, index) => {
               return (
                 <tr>
                   <td>{product.id}</td>

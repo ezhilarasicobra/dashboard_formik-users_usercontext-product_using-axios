@@ -7,10 +7,10 @@ const Editproduct = (props) => {
   const history = useHistory();
   const [productname, setProductname] = useState("");
   const [price, setPrice] = useState("");
-  const [isLoading, setLoading] = useState(false);
-useEffect(async() => {
+  const [isLoading,setLoading] = useState(false);
+useEffect(async () => {
 try {
-  let product= await  axios.get(`https://60efffc5f587af00179d3c35.mockapi.io/users/${props.match.params.id}`)
+  let product= await axios.get(`https://60efffc5f587af00179d3c35.mockapi.io/users/${props.match.params.id}`)
   setProductname(product.data.productname)
   setPrice(product.data.price)
 } catch (error) {
