@@ -59,7 +59,7 @@ let products = await axios.get("https://60efffc5f587af00179d3c35.mockapi.io/user
           <tbody>
             {
             
-          prodList.map((product, index) => {
+          prodList.map((product,index) => {
               return (
                 <tr>
                   <td>{product.id}</td>
